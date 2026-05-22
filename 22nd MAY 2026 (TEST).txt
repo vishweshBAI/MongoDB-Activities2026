@@ -1,0 +1,94 @@
+22nd MAY 2026 (TEST)
+
+
+Q.1 : Write an SQL query to fetch “FIRST_NAME” from Worker table using the alias name as <WORKER_NAME>
+
+ANS :	SELECT FIRST_NAME WORKER_NAME
+	FROM Worker;
+
+
+
+Q.2 : Write an SQL query to fetch unique values of DEPARTMENT from Worker table.
+
+ANS : 	SELECT DISTINCT DEPARTMENT
+	FROM Worker;
+
+
+
+
+Q.3 : Write an SQL query to print details for Workers with the first name as “Vipul” and “Satish” from Worker table.                             (without OR condition)
+
+ANS :	SELECT * FROM Worker
+	WHERE FIRST_NAME = 'Vipul'
+
+	UNION
+
+	SELECT * FROM Worker
+	WHERE FIRST_NAME = 'Satish';
+
+
+
+Q.4 : Write an SQL query to print details of the Workers whose FIRST_NAME contains ‘a’.
+
+ANS: 	SELECT * FROM Worker
+	WHERE FIRST_NAME LIKE '%a%';
+
+
+
+
+Q.5 : Write an SQL query to print details of the Workers whose FIRST_NAME ends with ‘a’.
+
+ANS :	SELECT * FROM Worker
+	WHERE FIRST_NAME LIKE '%a';
+
+
+
+Q.6 : Write an SQL query to print details of the admin whose SALARY lies between 100000 and 500000.
+
+ANS :	SELECT * FROM Worker
+	WHERE DEPARTMENT = 'Admin'
+	AND SALARY BETWEEN 100000 AND 500000;
+
+
+Q.7 : Write an SQL query to fetch the count of employees working in the department ‘Admin’.
+
+ANS :	SELECT COUNT(DEPARTMENT)
+	FROM Worker
+	WHERE DEPARTMENT = 'Admin';
+
+
+Q.8 : Write an SQL query to show the second highest salary from a table.
+
+ANS :	SELECT DISTINCT SALARY FROM Worker
+	ORDER BY SALARY DESC
+	LIMIT 1 OFFSET 1;
+
+
+
+Q.9 : Write an SQL query to fetch the departments that have less than three people in it.
+
+ANS :	SELECT DISTINCT DEPARTMENT
+	FROM Worker w1
+	WHERE (
+    		SELECT COUNT(*)
+    		FROM Worker w2
+    		WHERE w1.DEPARTMENT = w2.DEPARTMENT
+	) < 3;
+
+
+Q.10 : Write an SQL query to show all departments along with the total number of people in there.
+
+ANS :	SELECT DEPARTMENT, COUNT(WORKER_ID) FROM Worker
+	GROUP BY DEPARTMENT;
+
+
+
+Q.11 : Write an SQL query to print the name of employees having the highest salary in each department.
+
+ANS :	SELECT FIRST_NAME, DEPARTMENT, SALARY
+	FROM Worker w1
+	WHERE SALARY = (
+    		SELECT MAX(SALARY)
+    		FROM Worker w2
+    		WHERE w1.DEPARTMENT = w2.DEPARTMENT
+	);
